@@ -1,23 +1,35 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+     <common-head v-if="$route.meta.h==1"></common-head>
+     <transition name="slide-fade">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
 <script>
+import CommonHead from "./components/index/CommonHead.vue";
 export default {
-  name: 'App'
+  name: 'App',
+    components: {
+    CommonHead,
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.slide-fade-enter-active {
+  transition: all 0.5s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.25s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.slide-fade-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
 }
 </style>
