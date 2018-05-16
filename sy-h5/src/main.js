@@ -10,7 +10,6 @@ import VueCookie from 'vue-cookie'
 import fastclick from 'fastclick'
 import * as filters from './filters'
 import { VeeValidate, config } from './validate'
-
 import * as url from '@/api/request-path'
 // Vue.prototype.axios = axios
 Vue.prototype.STORAGE_URL = url.STORAGE_URL
