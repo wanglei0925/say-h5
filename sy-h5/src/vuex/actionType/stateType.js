@@ -1,0 +1,1 @@
+export const NAV_FLAG = 'NAV_FLAG';

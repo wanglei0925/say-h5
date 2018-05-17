@@ -9,7 +9,7 @@
     width:100%;
     height:100/@rem;
     .border-top(#333);
-    .bg-image('menu1');
+    // .bg-image('menu1');
 }
 
 </style>

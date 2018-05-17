@@ -9,6 +9,7 @@ import VueAxios from 'vue-axios'
 import VueCookie from 'vue-cookie'
 import fastclick from 'fastclick'
 import * as filters from './filters'
+import { store } from './vuex/index'
 import { VeeValidate, config } from './validate'
 import * as url from '@/api/request-path'
 // Vue.prototype.axios = axios
@@ -81,6 +82,7 @@ Vue.config.productionTip = false
 new Vue({
     el: '#app',
     router,
+    store,
     components: { App },
     template: '<App/>'
 })
