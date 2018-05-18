@@ -1,6 +1,6 @@
 //rest 
-// export const API_URL = "https://api.zhongcaiweiyin.com/";
-export const API_URL = "http://192.168.1.222:9999/";
+export const API_URL = "https://api.zhongcaiweiyin.com/";
+// export const API_URL = "http://192.168.1.222:9999/";
 // export const API_URL = "http://192.168.1.11:9999/";
 //存储服务器
 export const STORAGE_URL = "https://file.zhongcaiweiyin.com/";

@@ -10,9 +10,7 @@ export default new Router({
     scrollBehavior: () => ({ y: 0 }), // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
     routes: [{
             path: '/',
-            name: 'index',
-            component: Index,
-            meta: { h: 1, content: '中财微银', noBack: true }
+            redirect: '/index'
         },
         {
             path: '/index',
