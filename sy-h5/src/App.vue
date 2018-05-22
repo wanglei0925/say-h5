@@ -20,7 +20,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+@import "./common/less/index.less";
 .slide-fade-enter-active {
   transition: all 0.5s ease;
 }

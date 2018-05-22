@@ -9,3 +9,20 @@ export const bannerApi = {
         })
     }
 }
+export const projectApi = {
+    list(params) {
+        return axios.get(url.PRO_LIST, { params: params }).then((response) => {
+            return response.data
+        })
+    },
+    page(params) {
+        return axios.get(url.PRO_PAGE, { params: params }).then((response) => {
+            return response.data
+        })
+    },
+    detail(id) {
+        return axios.get(url.PRO_DETAIL + id).then((response) => {
+            return response.data
+        })
+    },
+}

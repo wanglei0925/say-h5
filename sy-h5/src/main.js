@@ -33,7 +33,6 @@ Vue.use(VeeValidate, config)
 // 添加请求拦截器
 axios.interceptors.request.use(function(config) {
     // 在发送请求之前做些什么
-    console.log('request')
     return config;
 }, function(error) {
     // 对请求错误做些什么
@@ -46,7 +45,6 @@ axios.interceptors.response.use(function(response) {
     // if (response.data.data == '0000') {
     //     store.dispatch('logoutState')
     // }
-    console.log('response')
     return response;
 }, function(error) {
     // 对响应错误做点什么

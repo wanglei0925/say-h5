@@ -1,13 +1,13 @@
 <template>
 
-    <div @click.stop="closeFlag()" v-if="navFlag">
+    <div @click.stop="closeFlag()">
         <transition name="show-fade">
-            <div class="common-left" v-if="navFlag"></div>
+            <div class="common-left" v-show="navFlag"></div>
         </transition>
         <transition name="slide-fade">
-            <div class="common-left-content" v-if="navFlag">
-                <div class="section">
-                    <div class="sec-top">
+            <div class="common-left-content" v-show="navFlag">
+                <div class="section1">
+                    <div class="sec-top1">
                         <img src="/static/img/menuavatar.png" alt="" @touchend.stop.self="toUrl('/login')">
                         <span @touchend.stop.self="toUrl('/login')">登录</span>/
                         <span @touchend="toUrl('/register')">注册</span>
@@ -27,7 +27,7 @@
                                 </div>
                             </li>
                             <li>
-                                <div @touchend.stop="toUrl('/project')">
+                                <div @touchend.stop="toUrl('/projectlist')">
                                     <img src="/static/img/menu3.png" alt="">
                                     <span>我要出借</span>
                                 </div>
@@ -85,7 +85,7 @@ export default {
   transition: all 0.5s ease;
 }
 .slide-fade-enter,
-.slide-fade-leave-to {
+.slide-fade-leave-active {
   transform: translateX(-100%);
   opacity: 0;
 }
@@ -100,7 +100,7 @@ export default {
   background: rgba(0, 0, 0, 0.3);
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 10000;
 }
 .common-left-content {
   position: fixed;
@@ -110,18 +110,18 @@ export default {
   top: 0;
   left: 0;
   overflow: auto;
-  z-index: 11;
+  z-index: 11000;
   color: #fff;
   font-size: 32 / @rem;
 }
-.section{
+.section1{
     position: relative;
     width: 100%;
     height: 100%;
     padding-top: 100/@rem;
     box-sizing: border-box;
 }
-.sec-top {
+.sec-top1 {
   width: 100%;
   img {
     display: inline-block;

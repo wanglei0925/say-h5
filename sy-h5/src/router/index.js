@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Index from '@/components/index/Index'
 import Login from '@/components/login/Login'
+import ProjectList from '@/components/project/ProjectList'
+import ProjectDetail from '@/components/project/ProjectDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +25,18 @@ export default new Router({
             name: 'login',
             component: Login,
             meta: { h: 1, content: '登录', noBack: true }
+        },
+        {
+            path: '/projectlist',
+            name: 'projectlist',
+            component: ProjectList,
+            meta: { h: 1, content: '我要出借' }
+        },
+        {
+            path: '/projectdetail/:id',
+            name: 'projectdetail',
+            component: ProjectDetail,
+            meta: { h: 1, content: '' }
         },
     ]
 })
