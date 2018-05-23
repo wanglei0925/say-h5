@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <tips></tips>
      <common-head v-if="$route.meta.h==1"></common-head>
      <common-left></common-left>   
      <transition name="slide-fade">
@@ -11,11 +12,13 @@
 <script>
 import CommonHead from "./components/index/CommonHead.vue";
 import CommonLeft from "./components/modal/CommonLeft.vue";
+import Tips from "./base/tips.vue";
 export default {
   name: 'App',
     components: {
     CommonHead,
-    CommonLeft
+    CommonLeft,
+    Tips
   },
 }
 </script>

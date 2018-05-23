@@ -26,3 +26,26 @@ export const projectApi = {
         })
     },
 }
+export const loginApi = {
+    getCode() {
+        // return url.COMMON_ENCRYPT + '?' + Math.random();
+        return axios.get(url.COMMON_ENCRYPT + '?' + Math.random(), { responseType: 'blob' }).then((response) => {
+            return response.data
+        })
+    },
+    comSMS(params) {
+        return axios.get(url.COMMON_SENDSMS, { params: params }).then((response) => {
+            return response.data
+        })
+    },
+    login(params) {
+        return axios.get(url.LOGIN, { params: params }).then((response) => {
+            return response.data;
+        })
+    },
+    loginout() {
+        return axios.get(url.USER_LOGOUT).then((response) => {
+            return response.data;
+        })
+    }
+}

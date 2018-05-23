@@ -47,6 +47,14 @@
                                     </div>
                                 </a>
                             </li>
+                            <li v-if="loginIn == 1" @touchend.stop="toExit">
+                                <div>
+                                    <div>
+                                        <img src="/static/img/menu5.png" alt="">
+                                        <span>退出</span>
+                                    </div>
+                                </div>
+                            </li>
 
                         </ul>
                     </div>
@@ -60,17 +68,26 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { loginApi } from "@/api/user-wwl.js";
 export default {
   data() {
     return {};
   },
   computed: {
-    ...mapGetters(["navFlag"])
+    ...mapGetters(["navFlag", "loginIn"])
   },
   methods: {
-    ...mapActions(["closeFlag"]),
+    ...mapActions(["closeFlag", "loginout"]),
     toUrl(url) {
-        this.$router.push(url);
+      this.$router.push(url);
+    },
+    toExit() {
+      loginApi.loginout().then(response => {
+        console.log(response);
+        if (response.status) {
+          this.loginout();
+        }
+      });
     }
   },
   created() {}
@@ -114,12 +131,12 @@ export default {
   color: #fff;
   font-size: 32 / @rem;
 }
-.section1{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding-top: 100/@rem;
-    box-sizing: border-box;
+.section1 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 100 / @rem;
+  box-sizing: border-box;
 }
 .sec-top1 {
   width: 100%;
@@ -144,26 +161,26 @@ export default {
     padding-left: 30 / @rem;
     font-size: 30 / @rem;
     color: #ccc;
-    img{
-    display: inline-block;
-    vertical-align: middle;
-    width: 38 / @rem;
-    height: 34 / @rem;
-    margin: 0 30 / @rem;
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 38 / @rem;
+      height: 34 / @rem;
+      margin: 0 30 / @rem;
     }
-    span{
-          display: inline-block;
-    vertical-align: middle;
+    span {
+      display: inline-block;
+      vertical-align: middle;
     }
   }
 }
-.sec-text{
-    position: absolute;
-    bottom: 60/@rem;
-    width: 100%;
-    text-align: center;
-    font-size: 24/@rem;
-    color: #333;
+.sec-text {
+  position: absolute;
+  bottom: 60 / @rem;
+  width: 100%;
+  text-align: center;
+  font-size: 24 / @rem;
+  color: #333;
 }
 </style>
 

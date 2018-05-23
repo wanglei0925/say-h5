@@ -8,8 +8,8 @@ export const STORAGE_URL = "https://file.zhongcaiweiyin.com/";
 //静态服务器
 export const PIC_URL = "https://static.zhongcaiweiyin.com/pc/";
 //sumapay
-// export const PAY_URL = "https://sumapay.zhongcaiweiyin.com/";
-export const PAY_URL = "http://192.168.1.222:7777/";
+export const PAY_URL = "https://sumapay.zhongcaiweiyin.com/";
+// export const PAY_URL = "http://192.168.1.222:7777/";
 // export const PAY_URL = "http://192.168.1.11:7777/";
 
 //my url

@@ -85,6 +85,7 @@ import ProjectItem from "../modal/ProjectItem";
 export default {
   data() {
     return {
+      src1:false,
       bannerList: {},
       ProjectList1: {},
       ProjectList2: {},

@@ -1,34 +1,33 @@
 <template>
 
-    <div class="login">
-        <div class="zcwy-logo"></div>
-        <form class="login-form" @submit.prevent="loginForm('r1')" data-vv-scope="r1" v-if="size==0">
-            <div class="login-form-item">
-                <img src="/static/img/tel.png" class="form-icon" alt="">
-                <input type="text" name="mobile" v-validate="'required|phone'" class="form-input" placeholder="请输入您的手机号" v-model="params.mobile">
-                <img src="/static/img/close.png" class="form-clear" alt="" @click="clearVal()">
-                <p v-show="errors.has('r1.mobile')">1{{ errors.first('r1.mobile') }}</p>
-            </div>
-            <div class="login-form-item">
-                <img src="/static/img/tel.png" class="form-icon" alt="">
-                <input type="password" v-model="params.password" name="password" v-validate="'required|min:6|max:20|password'" class="form-input" placeholder="请输入您的密码">
-                <img src="/static/img/close.png" class="form-clear" alt="" @click="clearPass()">
-                <p v-show="errors.has('r1.password')">1{{ errors.first('r1.password') }}</p>
-            </div>
-            <div class="login-form-item">
-                <img src="/static/img/tel.png" class="form-icon" alt="">
-                <input type="text" name="imgCode" v-validate="'required'" v-model="params.imgCode" class="form-input" placeholder="请输入您的图形验证码">
-                <img src="/static/img/close.png" class="form-yzm" alt="">
+  <div class="login">
+    <div class="zcwy-logo"></div>
+    <form class="login-form" @submit.prevent="loginForm('r1')" data-vv-scope="r1">
+      <div class="login-form-item">
+        <img src="/static/img/tel.png" class="form-icon" alt="">
+        <input type="text" name="mobile" v-validate="'required|phone'" class="form-input" placeholder="请输入您的手机号" v-model="params.mobile">
+        <img src="/static/img/close.png" class="form-clear" alt="" @click="clearVal()">
+        <p v-show="errors.has('r1.mobile')">{{ errors.first('r1.mobile') }}</p>
+      </div>
+      <div class="login-form-item">
+        <img src="/static/img/tel.png" class="form-icon" alt="">
+        <input type="password" v-model="params.password" name="password" v-validate="'required|min:6|max:20|password'" class="form-input" placeholder="请输入您的密码">
+        <img src="/static/img/close.png" class="form-clear" alt="" @click="clearPass()">
+        <p v-show="errors.has('r1.password')">{{ errors.first('r1.password') }}</p>
+      </div>
+      <div class="login-form-item">
+        <img src="/static/img/tel.png" class="form-icon" alt="">
+        <input type="text" name="imgCode" v-validate="'required'" v-model="params.imgCode" class="form-input" placeholder="请输入您的图形验证码">
+        <img :src="imgCodeSrc" class="form-yzm" alt="" @touchend.stop="getImgCode()">
 
-                <p v-show="errors.has('r1.imgCode')">1{{ errors.first('r1.imgCode') }}</p>
-            </div>
+        <p v-show="errors.has('r1.imgCode')">{{ errors.first('r1.imgCode') }}</p>
+      </div>
+      <div class="form-btn" @touchend.stop="loginForm('r1')">
+        立即登陆
+      </div>
+    </form>
 
-            <div class="form-btn" @touchend.stop="loginForm('r1')">
-                立即登陆
-            </div>
-        </form>
-
-        <form class="login-form" @submit.prevent="loginForm('r2')" data-vv-scope="r2" v-if="size==1">
+    <!-- <form class="login-form" @submit.prevent="loginForm('r2')" data-vv-scope="r2" v-if="size==1">
             <div class="login-form-item">
                 <img src="/static/img/tel.png" class="form-icon" alt="">
                 <input type="text" name="mobile" v-validate="'required|phone'" class="form-input" placeholder="请输入您的手机验证码">
@@ -39,11 +38,13 @@
                 立即登陆
             </div>
 
-        </form>
+        </form> -->
 
-    </div>
+  </div>
 </template>
 <script>
+import { loginApi } from "@/api/user-wwl.js";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -52,18 +53,35 @@ export default {
         password: "",
         imgCode: ""
       },
+      imgCodeSrc: "",
       size: 0
     };
   },
-  created() {},
+  created() {
+    this.getImgCode();
+  },
   methods: {
+    ...mapActions(["tipsShow", "login"]),
+    // 获取图形验证码
+    getImgCode() {
+      loginApi.getCode().then(response => {
+        this.imgCodeSrc = URL.createObjectURL(response);
+      });
+    },
+    // 登录
     loginForm(val) {
       this.$validator.validateAll(val).then(result => {
-        console.log(result);
         if (result) {
-          this.size++;
+          loginApi.login(this.params).then(response => {
+            if (response.status) {
+              console.log(response)
+              this.login();
+              this.$router.push("/user");
+            } else {
+              this.tipsShow(response.msg);
+            }
+          });
         }
-        console.log(this.size);
       });
     },
     sedmsg() {

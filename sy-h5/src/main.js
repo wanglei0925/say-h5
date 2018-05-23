@@ -13,6 +13,7 @@ import { store } from './vuex/index'
 import { VeeValidate, config } from './validate'
 import * as url from '@/api/request-path'
 // Vue.prototype.axios = axios
+axios.defaults.withCredentials = true;
 Vue.prototype.STORAGE_URL = url.STORAGE_URL
 Vue.prototype.API_URL = url.API_URL
 Vue.prototype.PIC_URL = url.PIC_URL

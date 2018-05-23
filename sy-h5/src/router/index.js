@@ -5,6 +5,8 @@ import Index from '@/components/index/Index'
 import Login from '@/components/login/Login'
 import ProjectList from '@/components/project/ProjectList'
 import ProjectDetail from '@/components/project/ProjectDetail'
+
+import User from '@/components/user/user'
 Vue.use(Router)
 
 export default new Router({
@@ -37,6 +39,12 @@ export default new Router({
             name: 'projectdetail',
             component: ProjectDetail,
             meta: { h: 1, content: '' }
+        },
+        {
+            path: '/user',
+            name: 'user',
+            component: User,
+            meta: { h: 1, content: '个人中心' }
         },
     ]
 })
