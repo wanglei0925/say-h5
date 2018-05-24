@@ -1,12 +1,12 @@
 <template>
   <transition name="confirm-fade">
-    <div class="confirm" v-show="showFlag" @click.stop>
+    <div class="confirm" v-show="confirmFlag" @click.stop>
       <div class="confirm-wrapper">
         <div class="confirm-content">
-          <p class="text">{{text}}</p>
+          <p class="text">确定此操作嘛？</p>
           <div class="operate">
-            <div @click="cancel" class="operate-btn left">{{cancelBtnText}}</div>
-            <div @click="confirm" class="operate-btn">{{confirmBtnText}}</div>
+            <div @click="cancel" class="operate-btn left">取消</div>
+            <div @click="confirm" class="operate-btn">确定</div>
           </div>
         </div>
       </div>
@@ -61,40 +61,23 @@
 }
 </style>
 <script type="text/ecmascript-6">
+import {mapGetters,mapActions} from 'vuex';
 export default {
-  props: {
-    text: {
-      type: String,
-      default: "确定要退出嘛？"
-    },
-    confirmBtnText: {
-      type: String,
-      default: "确定"
-    },
-    cancelBtnText: {
-      type: String,
-      default: "取消"
-    }
-  },
   data() {
     return {
       showFlag:true
     };
   },
+  computed:{
+...mapGetters(['confirmFlag'])
+  },
   methods: {
-    show() {
-      this.showFlag = true;
-    },
-    hide() {
-      this.showFlag = false;
-    },
+      ...mapActions(['confirmToggle','quitShow','quitHide']),
     cancel() {
-      this.hide();
-      this.$emit("cancel");
+      this.quitHide();
     },
     confirm() {
-      this.hide();
-      this.$emit("confirm");
+     this.quitShow();
     }
   }
 };

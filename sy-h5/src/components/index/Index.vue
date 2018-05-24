@@ -13,10 +13,10 @@
       </div>
     </div>
     <div class="index-second">
-      <div class="index-second-item">
+      <div class="index-second-item" @touchend.stop="toSign()">
         <img src="/static/img/index-item1.png" alt="">
         <div class="text">
-          新手指引
+          签到
         </div>
       </div>
       <div class="index-second-item">
@@ -51,7 +51,7 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="item in ProjectList3" :key="item.id">
-            <project-item  :item="item"></project-item>
+            <project-item :item="item"></project-item>
           </div>
 
         </div>
@@ -64,7 +64,7 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="item in ProjectList4" :key="item.id">
-            <project-item  :item="item" ></project-item>
+            <project-item :item="item"></project-item>
           </div>
 
         </div>
@@ -82,10 +82,11 @@ import "../../../static/css/swiper-4.1.0.min.css";
 import Swiper from "../../../static/js/swiper-4.1.0.min.js";
 import lineColor from "@/base/Line.vue";
 import ProjectItem from "../modal/ProjectItem";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      src1:false,
+      src1: false,
       bannerList: {},
       ProjectList1: {},
       ProjectList2: {},
@@ -116,6 +117,9 @@ export default {
     // this.getProjectrList2();
     // this.getProjectrList3();
   },
+  computed: {
+    ...mapGetters(["loginIn"])
+  },
   methods: {
     getBannerList() {
       bannerApi.list().then(response => {
@@ -131,7 +135,7 @@ export default {
                     if (response.status) {
                       this.ProjectList3 = response.data;
                       projectApi.list(this.param4).then(response => {
-                         this.ProjectList4 = response.data;
+                        this.ProjectList4 = response.data;
                         this.$nextTick(() => {
                           // DOM更新了
                           // swiper重新初始化
@@ -155,7 +159,16 @@ export default {
         }
       });
     },
-
+    toSign() {
+      if (this.loginIn != 0) {
+        console.log("已登陆");
+      } else {
+        this.$router.push({
+          name: "login",
+          query: { back: this.$route.fullPath }
+        });
+      }
+    }
   },
   components: {
     lineColor,

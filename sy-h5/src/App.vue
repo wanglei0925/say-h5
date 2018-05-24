@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <tips></tips>
+    <vuex-confirm></vuex-confirm>
      <common-head v-if="$route.meta.h==1"></common-head>
      <common-left></common-left>   
      <transition name="slide-fade">
@@ -13,12 +14,14 @@
 import CommonHead from "./components/index/CommonHead.vue";
 import CommonLeft from "./components/modal/CommonLeft.vue";
 import Tips from "./base/tips.vue";
+import VuexConfirm from "./base/vuexConfirm.vue";
 export default {
   name: 'App',
     components: {
     CommonHead,
     CommonLeft,
-    Tips
+    Tips,
+    VuexConfirm
   },
 }
 </script>

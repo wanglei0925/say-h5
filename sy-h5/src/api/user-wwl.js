@@ -47,5 +47,10 @@ export const loginApi = {
         return axios.get(url.USER_LOGOUT).then((response) => {
             return response.data;
         })
-    }
+    },
+    getUser() {
+        return axios.get(url.USER).then((response) => {
+            return response.data
+        })
+    },
 }

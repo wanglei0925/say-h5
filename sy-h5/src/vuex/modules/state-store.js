@@ -4,12 +4,18 @@ const state = {
     touchFlag: false,
     tipsFlag: false,
     tipsText: '',
+    confirmFlag: false,
+    quitState: '',
+    changeTitle: '中财微银',
 }
 const getters = {
     navFlag: state => state.navFlag,
     touchFlag: state => state.touchFlag,
     tipsFlag: state => state.tipsFlag,
-    tipsText: state => state.tipsText
+    tipsText: state => state.tipsText,
+    confirmFlag: state => state.confirmFlag,
+    quitState: state => state.quitState,
+    changeTitle: state => state.changeTitle,
 }
 const actions = {
     openFlag({ commit, state }) {
@@ -29,6 +35,26 @@ const actions = {
     },
     tipsHide({ commit, state }) {
         commit(types.TIPS_HIDE)
+    },
+    confirmShow({ commit, state }) {
+        commit(types.CONFIRM_SHOW)
+    },
+    confirmHide({ commit, state }) {
+        commit(types.CONFIRM_HIDE)
+    },
+    confirmToggle({ commit, state }, flag) {
+        commit(types.CONFIRM_TOGGLE, flag)
+    },
+    quitShow({ commit, state }) {
+        commit(types.CONFIRM_TOGGLE, false)
+        commit(types.QUIT_SURE)
+    },
+    quitHide({ commit, state }) {
+        commit(types.CONFIRM_TOGGLE, false)
+        commit(types.QUIT_CANCLE)
+    },
+    headerTitle({ commit, state }, data) {
+        commit(types.CHANGE_TITLE, data)
     },
 
 }
@@ -50,6 +76,24 @@ const mutations = {
     [types.TIPS_HIDE]: (state, data) => {
         state.tipsFlag = false;
         state.tipsText = '';
+    },
+    [types.CONFIRM_TOGGLE]: (state, flag) => {
+        state.confirmFlag = flag;
+    },
+    [types.CONFIRM_SHOW]: (state) => {
+        state.confirmFlag = true;
+    },
+    [types.CONFIRM_HIDE]: (state) => {
+        state.confirmFlag = false;
+    },
+    [types.QUIT_SURE]: (state) => {
+        state.quitState = true;
+    },
+    [types.QUIT_CANCLE]: (state) => {
+        state.quitState = false;
+    },
+    [types.CHANGE_TITLE]: (state, data) => {
+        state.changeTitle = data;
     }
 }
 

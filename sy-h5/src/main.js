@@ -12,6 +12,7 @@ import * as filters from './filters'
 import { store } from './vuex/index'
 import { VeeValidate, config } from './validate'
 import * as url from '@/api/request-path'
+import '@/assets/css/reset.css' /*引入公共样式*/
 // Vue.prototype.axios = axios
 axios.defaults.withCredentials = true;
 Vue.prototype.STORAGE_URL = url.STORAGE_URL
@@ -53,9 +54,10 @@ axios.interceptors.response.use(function(response) {
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.query.source) {
-        VueCookie.set('source', to.query.source)
-    }
+    // if (to.query.source) {
+    //     VueCookie.set('source', to.query.source)
+    // }
+    console.log(to)
     if ((to.meta.requiresAuth || to.path.indexOf("/user") > -1) && store.getters.loginIn == 0) {
         //未登录不可访问
         router.push({ name: 'login', query: { back: to.fullPath } });
@@ -68,11 +70,11 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-    if (to.fullPath != from.fullPath && from.path != "/") {
-        VueCookie.set("back_url", from.path);
-    }
-
-    window.scroll(0, 0);
+    // if (to.fullPath != from.fullPath && from.path != "/") {
+    //     VueCookie.set("back_url", from.path);
+    // }
+    // window.scroll(0, 0);
+    store.dispatch('headerTitle', to.meta.content)
 })
 
 Vue.config.productionTip = false

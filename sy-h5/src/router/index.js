@@ -44,7 +44,7 @@ export default new Router({
             path: '/user',
             name: 'user',
             component: User,
-            meta: { h: 1, content: '个人中心' }
+            meta: { h: 1, content: '个人中心', requiresAuth: true }
         },
     ]
 })

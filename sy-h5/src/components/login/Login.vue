@@ -59,6 +59,7 @@ export default {
   },
   created() {
     this.getImgCode();
+    console.log(this.$route.query.back);
   },
   methods: {
     ...mapActions(["tipsShow", "login"]),
@@ -74,9 +75,13 @@ export default {
         if (result) {
           loginApi.login(this.params).then(response => {
             if (response.status) {
-              console.log(response)
+              console.log(response);
               this.login();
-              this.$router.push("/user");
+              if (this.$route.query.back) {
+                this.$router.push(this.$route.query.back);
+              } else {
+                this.$router.push("/user");
+              }
             } else {
               this.tipsShow(response.msg);
             }

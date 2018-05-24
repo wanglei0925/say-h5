@@ -96,10 +96,10 @@
         .bg-image("/static/img/novice2");
       }
       &.dingzhi {
-        .bg-image("/static/img/dingzhi");
+        .bg-image("/static/img/customized-gray");
       }
       &.dingzhi-red {
-        .bg-image("/static/img/dingzhi2");
+        .bg-image("/static/img/dingzhi");
       }
       &.time {
         .bg-image("/static/img/time-grey");
