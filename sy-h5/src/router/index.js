@@ -3,9 +3,12 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Index from '@/components/index/Index'
 import Login from '@/components/login/Login'
+// 我要出借
 import ProjectList from '@/components/project/ProjectList'
 import ProjectDetail from '@/components/project/ProjectDetail'
-
+// 我要借款
+import Borrow from '@/components/borrow/Borrow'
+//我的账户
 import User from '@/components/user/user'
 Vue.use(Router)
 
@@ -39,6 +42,12 @@ export default new Router({
             name: 'projectdetail',
             component: ProjectDetail,
             meta: { h: 1, content: '' }
+        },
+        {
+            path: '/borrow',
+            name: 'borrow',
+            component: Borrow,
+            meta: { h: 1, content: '我要借款', }
         },
         {
             path: '/user',

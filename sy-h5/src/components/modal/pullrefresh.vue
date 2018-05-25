@@ -25,7 +25,7 @@
 .yo-scroll {
   font-size: 24 / @rem;
   position: absolute;
-  top: 88/@rem;
+  top: 176/@rem;
   right: 0;
   bottom: 0;
   left: 0;
