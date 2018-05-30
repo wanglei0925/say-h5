@@ -14,7 +14,7 @@ import { VeeValidate, config } from './validate'
 import * as url from '@/api/request-path'
 import '@/assets/css/reset.css' /*引入公共样式*/
 // Vue.prototype.axios = axios
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true
 Vue.prototype.STORAGE_URL = url.STORAGE_URL
 Vue.prototype.API_URL = url.API_URL
 Vue.prototype.PIC_URL = url.PIC_URL
@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
     // if (to.query.source) {
     //     VueCookie.set('source', to.query.source)
     // }
-    console.log(to)
+    // console.log(to)
     if ((to.meta.requiresAuth || to.path.indexOf("/user") > -1) && store.getters.loginIn == 0) {
         //未登录不可访问
         router.push({ name: 'login', query: { back: to.fullPath } });

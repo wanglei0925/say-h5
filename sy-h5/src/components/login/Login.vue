@@ -59,13 +59,13 @@ export default {
   },
   created() {
     this.getImgCode();
-    console.log(this.$route.query.back);
   },
   methods: {
     ...mapActions(["tipsShow", "login"]),
     // 获取图形验证码
     getImgCode() {
       loginApi.getCode().then(response => {
+        console.log(response)
         this.imgCodeSrc = URL.createObjectURL(response);
       });
     },

@@ -1,5 +1,6 @@
 import * as url from './mock-http-url'
 import axios from 'axios'
+import { STORAGE_URL } from './request-path'
 //获取轮播图
 
 export const bannerApi = {
@@ -22,6 +23,11 @@ export const projectApi = {
     },
     detail(id) {
         return axios.get(url.PRO_DETAIL + id).then((response) => {
+            return response.data
+        })
+    },
+    invest(params) {
+        return axios.get(url.PRO_INVEST, { params: params }).then((response) => {
             return response.data
         })
     },
@@ -53,4 +59,71 @@ export const loginApi = {
             return response.data
         })
     },
+}
+export const articleApi = {
+    list(params) {
+        return axios.get(url.ART_LIST, { params: params }).then((response) => {
+            return response.data
+        })
+    },
+
+    page(params) {
+        return axios.get(url.ART_PAGE, { params: params }).then((response) => {
+            return response.data
+        })
+    },
+
+    detail(id) {
+        return axios.get(url.ART_DETAIL + id).then((response) => {
+            return response.data
+        })
+    },
+
+    content(url) {
+        return axios.get(url, { responseType: 'text', withCredentials: false }).then((response) => {
+            return response.data
+        })
+    },
+    content2(id) {
+        return axios.get(STORAGE_URL + id, { responseType: 'text', withCredentials: false }).then((response) => {
+            return response.data
+        })
+    },
+
+}
+
+export const tradeApi = {
+    list(params) {
+        return axios.get(url.TRADE_LIST, { params: params }).then((response) => {
+            return response.data
+        })
+    },
+
+    page(params) {
+        return axios.get(url.TRADE_PAGE, { params: params }).then((response) => {
+            return response.data
+        })
+    },
+
+    detail(id) {
+        return axios.get(url.TRADE_DETAIL + id).then((response) => {
+            return response.data
+        })
+    },
+
+    loanInfo(id) {
+        return axios.get(url.LOAN_INFO + id).then((response) => {
+            return response.data
+        })
+    },
+    ranking() {
+        return axios.get(url.TRADE_RANKING).then((response) => {
+            return response.data
+        })
+    },
+    loanList() {
+        return axios.get(url.TRADE_LOANLIST).then((response) => {
+            return response.data
+        })
+    }
 }

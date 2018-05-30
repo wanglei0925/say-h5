@@ -1,6 +1,6 @@
 <template>
 
-  <div @click.stop="closeFlag()">
+  <div @touchend="closeFlag()">
     <transition name="show-fade">
       <div class="common-left" v-show="navFlag"></div>
     </transition>
@@ -11,8 +11,8 @@
           <div class="sec-top1">
             <img src="/static/img/menuavatar.png" alt="">
             <span v-if="loginIn==0">
-              <span @touchend.stop.self="toUrl('/login')">登录</span>/
-              <span @touchend="toUrl('/register')">注册</span>
+              <span @touchend.stop="toUrl('/login')">登录</span>/
+              <span @touchend.stop="toUrl('/register')">注册</span>
             </span>
 
             <span v-if="loginIn==1">
@@ -45,7 +45,28 @@
                   <span>我的账户</span>
                 </div>
               </li>
+              <li>
+                <div @touchend.stop="childShow()">
+                  <img src="/static/img/menu2.png" alt="">
+                  <span>信息披露</span>
+                  <i :class="{'rotate1':rotaflag}"></i>
+                </div>
+                <div class="info-child" v-show="rotaflag">
+                  <div class="info-child-item" @touchend.stop="toUrl('/about')">
+                    关于我们
+                  </div>
+                  <div class="info-child-item" @touchend.stop="toUrl('/company')">
+                    平台公告
+                  </div>
+                  <div class="info-child-item" @touchend.stop="toUrl('/pay')">
+                    还款公告
+                  </div>
+                  <div class="info-child-item" @touchend.stop="toUrl('/kuan')">
+                    放款公告
+                  </div>
+                </div>
 
+              </li>
               <li>
                 <a href="tel:400-839-7365">
                   <div>
@@ -81,7 +102,8 @@ export default {
   data() {
     return {
       text: "确定退出嘛？",
-      conflag: false
+      conflag: false,
+      rotaflag: false
     };
   },
   computed: {
@@ -90,14 +112,18 @@ export default {
   methods: {
     ...mapActions(["closeFlag", "loginout", "confirmToggle"]),
     toUrl(url) {
+      this.closeFlag();
       this.$router.push(url);
+    },
+    childShow() {
+      this.rotaflag = !this.rotaflag;
     },
     toExit() {
       // this.conflag = true;
     },
     vuexQuit() {
+      this.closeFlag();
       this.confirmToggle(true);
-      // console.log(this.quitState)
     }
     // SureConfirm() {
     //   loginApi.loginout().then(response => {
@@ -125,6 +151,11 @@ export default {
       } else {
         console.log("点击了取消按钮");
       }
+    },
+    navFlag: function(val) {
+      if (!val) {
+        this.rotaflag = false;
+      }
     }
   },
   components: {
@@ -149,6 +180,7 @@ export default {
 .show-fade-leave-to {
   opacity: 0;
 }
+
 .common-left {
   position: fixed;
   width: 100%;
@@ -195,11 +227,15 @@ export default {
 .menu {
   width: 100%;
   li {
-    height: 90 / @rem;
+    min-height: 90 / @rem;
     line-height: 90 / @rem;
     padding-left: 30 / @rem;
-    font-size: 30 / @rem;
+    font-size: 0 / @rem;
     color: #ccc;
+    a {
+      display: block;
+      height: 90 / @rem;
+    }
     img {
       display: inline-block;
       vertical-align: middle;
@@ -208,8 +244,29 @@ export default {
       margin: 0 30 / @rem;
     }
     span {
+      font-size: 30 / @rem;
       display: inline-block;
       vertical-align: middle;
+    }
+    div {
+      position: relative;
+      i {
+        position: absolute;
+        top: 50%;
+        box-sizing: border-box;
+        right: 50 / @rem;
+        width: 20 / @rem;
+        height: 20 / @rem;
+        transform: translate(0, -50%) rotate(45deg);
+        border: 2px solid #fff;
+        border-bottom: none;
+        border-left: none;
+        transition: all 0.5s;
+      }
+      .rotate1 {
+        margin-top: -10 / @rem;
+        transform: rotate(135deg);
+      }
     }
   }
 }
@@ -220,6 +277,17 @@ export default {
   text-align: center;
   font-size: 24 / @rem;
   color: #333;
+}
+.info-child {
+  width: 100%;
+  min-height: 80 / @rem;
+  .info-child-item {
+    height: 60 / @rem;
+    line-height: 60 / @rem;
+    padding-left: 98 / @rem;
+    font-size: 28 / @rem;
+    color: #ccc;
+  }
 }
 </style>
 

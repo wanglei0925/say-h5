@@ -79,6 +79,9 @@ export default {
     font-size: 32 / @rem;
     color: #333;
     line-height: 80 / @rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .common-right {
     width: 20%;
