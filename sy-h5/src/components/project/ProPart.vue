@@ -1,27 +1,27 @@
 <template>
-    <div class="propart-wrapper">
-        
-        <div v-if="partList.length>0">
-        <div class="propart-item-title">
-            <div>
-                项目名称
-            </div>
-            <div>
-               债权总额
-            </div>
-            <div>
-                借款简介
-            </div>
-        </div>
-        <div class="propart-item" v-for="(item,index) in partList" :key="index">
-            <span v-for="(child,index) in item.split('|')" :key="index">
-                {{child}}
-            </span>
-        </div>
+  <div class="propart-wrapper">
 
+    <div v-if="partList.length>0">
+      <div class="propart-item-title">
+        <div>
+          项目名称
         </div>
-          <no-record v-if="partList.length<0"></no-record>
+        <div>
+          债权总额
+        </div>
+        <div>
+          借款简介
+        </div>
+      </div>
+      <div class="propart-item" v-for="(item,index) in partList" :key="index">
+        <span v-for="(child,index) in item.split('|')" :key="index">
+          {{child}}
+        </span>
+      </div>
+
     </div>
+    <no-record v-if="partList.length<=0"></no-record>
+  </div>
 
 </template>
 <style lang="less" scoped>
@@ -76,12 +76,14 @@ export default {
     getContent() {
       projectApi.detail(this.$route.params.id).then(_response => {
         this.headerTitle(_response.data.project.title);
-        this.partList = _response.data.proAttr.groups.split(";");
+        if (_response.data.proAttr) {
+          this.partList = _response.data.proAttr.groups.split(";");
+        }
       });
     }
   },
   components: {
-      NoRecord
+    NoRecord
   }
 };
 </script>

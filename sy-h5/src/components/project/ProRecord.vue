@@ -24,7 +24,7 @@
                 </span>
             </div>
         </div>
-        <no-record v-if="recordList.length<0"></no-record>
+        <no-record v-if="recordList.length<=0"></no-record>
     </div>
 
 </template>

@@ -28,6 +28,12 @@
                 </div>
               </li>
               <li>
+                <div @touchend.stop="toUrl('/search')">
+                  <img src="/static/img/menu1.png" alt="">
+                  <span>better-scroll</span>
+                </div>
+              </li>
+              <li>
                 <div @touchend.stop="toUrl('/borrow')">
                   <img src="/static/img/menu2.png" alt="">
                   <span>我要借款</span>

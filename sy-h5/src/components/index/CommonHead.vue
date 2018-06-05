@@ -48,6 +48,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10001;
 }
 .common-header {
   width: 100%;
@@ -55,7 +56,6 @@ export default {
   box-sizing: border-box;
   border-bottom: 1px solid #ddd;
   background: #fff;
-  z-index: 10;
   // box-shadow: 0 0 4 / @rem rgba(0, 0, 0, 0.5);
   .flex;
   .common-left {

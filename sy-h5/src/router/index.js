@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Index from '@/components/index/Index'
+import Search from '@/components/index/Search'
+import Her from '@/components/index/her'
 import Login from '@/components/login/Login'
 // 我要出借
 import ProjectList from '@/components/project/ProjectList'
@@ -41,6 +43,18 @@ export default new Router({
             name: 'index',
             component: Index,
             meta: { h: 1, content: '中财微银', noBack: true }
+        },
+        {
+            path: '/search',
+            name: 'search',
+            component: Search,
+            meta: { h: 2, content: 'better-scroll', noBack: true }
+        },
+        {
+            path: '/her',
+            name: 'her',
+            component: Her,
+            meta: { h: 2, content: 'her', noBack: true }
         },
         {
             path: '/login',

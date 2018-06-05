@@ -37,7 +37,7 @@
 
       <div class="project-detail-item">
         <div class="project-detail-num">
-          {{item.investCharge/100}}元
+         {{item.targetCharge/1000000}}万
         </div>
         <div class="project-detail-text">
           项目金额
