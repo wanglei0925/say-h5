@@ -1,7 +1,7 @@
 <template>
  <div class="tab" ref="tab">
   <ul class="tab_content" ref="tabWrapper">
-   <li class="tab_item" v-for="item in itemList" ref="tabitem">
+   <li class="tab_item" v-for="(item,index) in itemList" ref="tabitem" :key="index">
      {{item.title}}
    </li>
   </ul>

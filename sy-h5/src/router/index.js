@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Index from '@/components/index/Index'
-import Search from '@/components/index/Search'
-import Her from '@/components/index/her'
+// import Index from '@/components/index/Index'
+// import Search from '@/components/index/Search'
+// import Her from '@/components/index/her'
 import Login from '@/components/login/Login'
+const Index = () =>
+    import ( /* webpackChunkName: "group-foo" */ '@/components/index/Index')
+const Search = () =>
+    import ( /* webpackChunkName: "group-foo" */ '@/components/index/Search')
+const Her = () =>
+    import ( /* webpackChunkName: "group-foo" */ '@/components/index/her')
+
 // 我要出借
 import ProjectList from '@/components/project/ProjectList'
 import ProjectDetail from '@/components/project/ProjectDetail'
@@ -31,9 +38,34 @@ import Detail from '@/components/annoce/Detail'
 import User from '@/components/user/user'
 Vue.use(Router)
 
+const scrollBehavior = (to, from, savedPosition) => {
+    if (savedPosition) {
+        // savedPosition is only available for popstate navigations.
+        return savedPosition
+    } else {
+        const position = {}
+            // new navigation.
+            // scroll to anchor by returning the selector
+        if (to.hash) {
+            position.selector = to.hash
+        }
+        // check if any matched route config has meta that requires scrolling to top
+        if (to.matched.some(m => m.meta.scrollToTop)) {
+            // cords will be used if no selector is provided,
+            // or if the selector didn't match any element.
+            position.x = 0
+            position.y = 0
+        }
+        // if the returned position is falsy or an empty object,
+        // will retain current scroll position.
+        return position
+    }
+}
+
 export default new Router({
     mode: 'history',
-    scrollBehavior: () => ({ y: 0 }), // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
+    scrollBehavior,
+    // scrollBehavior: () => ({ y: 0 }), // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
     routes: [{
             path: '/',
             redirect: '/index'
@@ -42,13 +74,13 @@ export default new Router({
             path: '/index',
             name: 'index',
             component: Index,
-            meta: { h: 1, content: '中财微银', noBack: true }
+            meta: { h: 1, content: '中财微银', noBack: true, scrollToTop: true }
         },
         {
             path: '/search',
             name: 'search',
             component: Search,
-            meta: { h: 2, content: 'better-scroll', noBack: true }
+            meta: { h: 2, content: 'better-scroll', noBack: true, scrollToTop: true }
         },
         {
             path: '/her',
@@ -66,7 +98,7 @@ export default new Router({
             path: '/projectlist',
             name: 'projectlist',
             component: ProjectList,
-            meta: { h: 1, content: '我要出借' }
+            meta: { h: 1, content: '我要出借', scrollToTop: true }
         },
         {
             path: '/projectdetail/:id',
