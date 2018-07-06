@@ -141,7 +141,7 @@ export default new Router({
             path: '/borrow',
             name: 'borrow',
             component: Borrow,
-            meta: { h: 1, content: '我要借款', }
+            meta: { h: 2, content: '我要借款', }
         },
         // 平台信息公告的模块
         {
