@@ -9,7 +9,7 @@
                 222
             </div>
             <div :class="{'current':getIndex===2}" @touchend.stop="getScroll(2)">
-               333
+                333
             </div>
         </div>
 
@@ -292,10 +292,11 @@ export default {
             "当你处在层次越低的地方，你的时间价值就越小，一个小时都在争论一块钱的事，你这一小时就是值这一块，一下午都在讨论谁谁谁又出轨了，你的一下午也就值这点绯闻。"
         }
       ],
-      scrollFlag:true,
+      scrollFlag: true,
+      scrollMouse: true, //判断是否滚动滚轮
       scrollY: 0,
       times: 0,
-      stepLength:0,
+      stepLength: 0,
       ListHeight: []
     };
   },
@@ -333,16 +334,16 @@ export default {
       }
     },
     getScroll(val) {
-      //   document.documentElement.scrollTop = document.body.scrollTop = this.ListHeight[val];
-      if(!this.scrollFlag){
-          return;
+      if (!this.scrollFlag) {
+        return;
       }
+      this.scrollMouse = true;
       this.scrollFlag = false;
-      this.stepLength = Math.abs(this.scrollY - this.ListHeight[val])/25;
-      console.log(this.stepLength)
+      this.stepLength = Math.abs(this.scrollY - this.ListHeight[val]) / 25;
+      console.log(this.stepLength);
       this.times = setInterval(() => {
+        this.scrollMouse = true;
         let scrollsetY = this.scrollY;
-        
         if (scrollsetY - this.ListHeight[val] > this.stepLength) {
           scrollsetY -= this.stepLength;
         } else if (this.ListHeight[val] - scrollsetY > this.stepLength) {
@@ -375,6 +376,11 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop;
       this.scrollY = scrollTop;
+      if (!this.scrollMouse) {
+           this.scrollFlag = true;
+        clearInterval(this.times);
+      }
+      this.scrollMouse = false;
     }
   },
   destroyed() {
