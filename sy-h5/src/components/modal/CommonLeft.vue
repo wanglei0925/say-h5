@@ -34,6 +34,12 @@
                 </div>
               </li>
               <li>
+                <div @touchend.stop="toUrl('/dhf')">
+                  <img src="/static/img/menu2.png" alt="">
+                  <span>都鸿飞</span>
+                </div>
+              </li>
+              <li>
                 <div @touchend.stop="toUrl('/borrow')">
                   <img src="/static/img/menu2.png" alt="">
                   <span>我要借款</span>

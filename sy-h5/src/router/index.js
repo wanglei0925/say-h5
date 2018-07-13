@@ -6,15 +6,20 @@ import HelloWorld from '@/components/HelloWorld'
 // import Her from '@/components/index/her'
 import Login from '@/components/login/Login'
 const Index = () =>
-    import ( /* webpackChunkName: "group-foo" */ '@/components/index/Index')
+    import ( /* webpackChunkName: "group-foo1" */ '@/components/index/Index')
 const Search = () =>
-    import ( /* webpackChunkName: "group-foo" */ '@/components/index/Search')
+    import ( /* webpackChunkName: "group-foo2" */ '@/components/index/Search')
 const Her = () =>
-    import ( /* webpackChunkName: "group-foo" */ '@/components/index/her')
+    import ( /* webpackChunkName: "group-foo3" */ '@/components/index/her')
 
-// 我要出借
-import ProjectList from '@/components/project/ProjectList'
-import ProjectDetail from '@/components/project/ProjectDetail'
+const ProjectList = () =>
+    import ( /* webpackChunkName: "group-foo4" */ '@/components/project/ProjectList')
+
+const ProjectDetail = () =>
+    import ( /* webpackChunkName: "group-foo5" */ '@/components/project/ProjectDetail')
+    // 我要出借
+    // import ProjectList from '@/components/project/ProjectList'
+    // import ProjectDetail from '@/components/project/ProjectDetail'
 import Prointro from '@/components/project/Prointro'
 import ProPart from '@/components/project/ProPart'
 import ProRecord from '@/components/project/ProRecord'
