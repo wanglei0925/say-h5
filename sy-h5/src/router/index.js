@@ -26,7 +26,7 @@ import ProRecord from '@/components/project/ProRecord'
 import ProData from '@/components/project/ProData'
 import ProBorrow from '@/components/project/ProBorrow'
 
-
+import Dhf from '@/components/dhf/dhf'
 
 // 我要借款
 import Borrow from '@/components/borrow/Borrow'
@@ -80,6 +80,12 @@ export default new Router({
             name: 'index',
             component: Index,
             meta: { h: 1, content: '中财微银', noBack: true, scrollToTop: true }
+        },
+        {
+            path: '/dhf',
+            name: 'dhf',
+            component: Dhf,
+            meta: { h: 1, content: '日期倒计时 ' }
         },
         {
             path: '/search',
